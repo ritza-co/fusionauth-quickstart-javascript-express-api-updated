@@ -10,10 +10,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/messages', function (req, res, next) {
-  if (!hasRole('teller')) {
+  if (!hasRole(req.cookies['app.at'], 'teller')) {
     res.status(500);
-    res.send({ error: JSON.stringify(e) });
-  } else res.send({ messages: ['Hello'] });
+    res.send({ error: 'You do not have a role permitted to do that.' });
+  } else {
+    res.send({ messages: ['Hello'] });
+  }
 });
 
 module.exports = router;

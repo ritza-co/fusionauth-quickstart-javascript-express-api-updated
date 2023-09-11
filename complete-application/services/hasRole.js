@@ -1,11 +1,14 @@
 require('dotenv/config');
 const jose = require('jose');
 
-async function hasRole(role) {
-  const accessToken = req.cookies['app.at'];
-  const decodedToken = await jose.decodeJwt(accessToken);
-  console.dir(decodedToken);
-  return decodedToken.roles.include(role);
+function hasRole(jwt, role) {
+  // console.dir(`Decoding token in hasRole`);
+  // console.dir(jwt);
+  const decodedToken = jose.decodeJwt(jwt);
+  // console.dir(`Decoded token in hasRole`);
+  // console.dir(decodedToken);
+  // console.log(decodedToken.roles.includes(role));
+  return decodedToken.roles.includes(role);
 };
 
 module.exports = hasRole;
