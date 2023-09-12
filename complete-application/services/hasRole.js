@@ -1,14 +1,12 @@
-require('dotenv/config');
 const jose = require('jose');
 
-function hasRole(jwt, role) {
-  // console.dir(`Decoding token in hasRole`);
-  // console.dir(jwt);
-  const decodedToken = jose.decodeJwt(jwt);
-  // console.dir(`Decoded token in hasRole`);
-  // console.dir(decodedToken);
-  // console.log(decodedToken.roles.includes(role));
-  return decodedToken.roles.includes(role);
-};
+function hasRole(role) {
+  return (req, res, next) => {
+    const decodedToken = jose.decodeJwt(req.cookies['app.at']);
+    if (decodedToken.roles.includes(role)) return next();
+    res.status(500);
+    res.send({ error: `You do not have the ${role} role.` });
+  }
+}
 
 module.exports = hasRole;
