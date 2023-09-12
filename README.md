@@ -1,6 +1,6 @@
-# Quickstart: Spring API Resource Server with FusionAuth
+# Quickstart: Express.js API Resource Server with FusionAuth
 
-This repository contains a SpringBoot application that works with a locally-running instance of [FusionAuth](https://fusionauth.io/), the authentication and authorization platform.
+This repository contains an application that works with a locally-running instance of [FusionAuth](https://fusionauth.io/), the authentication and authorization platform.
 
 ## Setup
 
@@ -8,12 +8,8 @@ This repository contains a SpringBoot application that works with a locally-runn
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/): Presumably you already have this on your machine if you are looking at this project locally; if not, use your platform's package manager to install git, and `git clone` this repo.
-* [Java](https://www.oracle.com/java/technologies/downloads/): Java can be installed via a variety of methods
-* `mvn`: Maven, a java package manager. Install it by [following the instructions here](https://maven.apache.org/install.html).
+* [node](https://nodejs.org/en/download) version 18 or later.
 * [Docker](https://www.docker.com): For standing up FusionAuth from within a Docker container. (You can [install it other ways](https://fusionauth.io/docs/v1/tech/installation-guide/), but for this example we will assume you are using Docker.)
-
-This app was built using Java 17 and the maven wrapper. If you wish to use a different version of Java you will need to update the `java.version` in the [pom file](./complete-application/pom.xml).
-
 
 ### FusionAuth Installation via Docker
 
@@ -37,21 +33,20 @@ FusionAuth will be initially configured with these settings:
 
 You can log into the [FusionAuth admin UI](http://localhost:9011/admin) and look around if you want, but with Docker/Kickstart you don't need to.
 
-### Spring API complete-application
+### complete-application
 
-The `complete-application` directory contains a minimal SpringBoot app configured to authenticate with locally running FusionAuth.
+The `complete-application` directory contains a minimal app configured to authenticate with locally running FusionAuth.
 
-Install the dependencies via the Maven wrapper and run the app server with:
+Install the dependencies and run the app with
 ```
 cd complete-application
-./mvnw package
-./mvnw spring-boot:run
+npm install
+npm run start
 ```
-Note: If you are on Windows swap `./mvnw` with `.\mvnw.cmd`
 
-SpringBoot is now serving two api endpoints
- - [http://localhost:8080/make-change](http://localhost:8080/make-change) - this endpoint calculates the change to make from a given total
- - [http://localhost:8080/panic](http://localhost:8080/panic) - this endpoint simulates notifying the police of an incident.
+The app is now serving two api endpoints
+ - [http://localhost:3000/make-change](http://localhost:3000/make-change) - this endpoint calculates the change to make from a given total
+ - [http://localhost:3000/panic](http://localhost:3000/panic) - this endpoint simulates notifying the police of an incident.
 
 You can login with a user preconfigured during Kickstart, `teller@example.com` with the password of `password` and `applicationId` by calling:
 
@@ -68,4 +63,4 @@ curl --location 'https://local.fusionauth.io/api/login' \
 
 ### Further Information
 
-Visit https://fusionauth.io/docs/quickstarts/quickstart-springboot-api for a step-by-step guide on how to build this Spring API from scratch.
+Visit https://fusionauth.io/docs/quickstarts/quickstart-javascript-express-api for a step-by-step guide on how to build this API from scratch.
