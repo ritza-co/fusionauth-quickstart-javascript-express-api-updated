@@ -4,7 +4,7 @@ function hasRole(roles) {
   return (req, res, next) => {
     const decodedToken = jose.decodeJwt(req.cookies['app.at']);
     if (roles.some((role) => decodedToken.roles.includes(role))) return next();
-    res.status(500);
+    res.status(403);
     res.send({ error: `You do not have a role with permissions to do this.` });
   }
 }
