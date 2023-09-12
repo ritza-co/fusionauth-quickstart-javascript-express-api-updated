@@ -10,7 +10,7 @@ router.post('/panic', hasRole('teller'), function (req, res, next) {
   res.send("We've called the police!");
 });
 
-router.get('/make-change', hasRole('teller'), function (req, res, next) {
+router.get('/make-change', hasRole('customer'), function (req, res, next) {
   const amount = req.query.total;
   const result = { total: 0, nickels: 0, pennies: 0};
   result.total = Math.trunc(parseFloat(amount)*100)/100;
