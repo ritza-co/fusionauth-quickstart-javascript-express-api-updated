@@ -6,7 +6,12 @@ const jwksClient = jose.createRemoteJWKSet(
 );
 
 const verifyJWT = async (req, res, next) => {
-  const access_token = req.cookies['app.at'];
+  const authHeader = req.headers.authorization;
+  const tokenFromHeader = authHeader ? authHeader.split(' ')[1].toString() : null;
+  const access_token = req.cookies['app.at'] || tokenFromHeader;
+  console.log(req.cookies['app.at'])
+  console.log(access_token)
+  console.log(typeof(access_token))
   if (!access_token) {
     res.status(401);
     res.send({ error: 'Missing token cookie and Authorization header' });
